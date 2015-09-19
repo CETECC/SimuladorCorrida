@@ -15,33 +15,48 @@ namespace SimuladorCorrida
         public RadioButton MeuRadioButton { get; set; }
         public Label MeuLabel { get; set; }
 
-        public Apostador()
-        {
-            MinhaAposta = null;
-            AtualizarLabels();
-        }
-
         public void AtualizarLabels()
         {
             //TODO: Atribua ao meu Label a descrição da minha aposta, e ao Label do 
             // meu RadioButton o meu dinheiro (Ex.: "João tem 45 reais")
+
+            if (this.MinhaAposta != null)
+            {
+                this.MeuLabel.Text = this.MinhaAposta.ObterDescricao();
+            }
+            else
+            {
+                this.MeuLabel.Text = string.Format("{0} não fez nenhuma aposta.", this.Nome);
+            }
+            this.MeuRadioButton.Text = string.Format("{0} tem {1} reais", this.Nome, this.Dinheiro);
         }
 
         public void LimparAposta()
         {
-            MinhaAposta.Valor = 0;
+            this.MinhaAposta.Valor = 0;
         }
 
         public bool NovaAposta(int valor, int numCachorro)
         {
-            //TODO: Crie uma nova aposta e armazene no meu campo MinhaAposta
+            // Crie uma nova aposta e armazene no campo MinhaAposta.
+            // Retorne VERDADEIRO se o apostador tem dinheiro para a aposta.
+            if (valor > this.Dinheiro)
+            {
+                return false;
+            }
 
-            return false;
+            this.MinhaAposta = new Aposta();
+            this.MinhaAposta.MeuApostador = this;
+            this.MinhaAposta.NumCachorro = numCachorro;
+            this.MinhaAposta.Valor = valor;
+
+            return true;
         }
 
         public void Coletar(int vencedor)
         {
             //TODO: Cobre minha aposta se eu ganhei
+            this.Dinheiro += MinhaAposta.ObterValorPagamento(vencedor);
         }
     }
 }

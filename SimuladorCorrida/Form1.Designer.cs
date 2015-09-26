@@ -28,8 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.picPista = new System.Windows.Forms.PictureBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.numCachorro = new System.Windows.Forms.NumericUpDown();
             this.btnCorram = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.numValor = new System.Windows.Forms.NumericUpDown();
@@ -49,28 +50,27 @@
             this.pic2 = new System.Windows.Forms.PictureBox();
             this.pic3 = new System.Windows.Forms.PictureBox();
             this.pic4 = new System.Windows.Forms.PictureBox();
-            this.numCachorro = new System.Windows.Forms.NumericUpDown();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picPista)).BeginInit();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numCachorro)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numValor)).BeginInit();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pic1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pic2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pic3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pic4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numCachorro)).BeginInit();
             this.SuspendLayout();
             // 
-            // pictureBox1
+            // picPista
             // 
-            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pictureBox1.Image = global::SimuladorCorrida.Properties.Resources.racetrack;
-            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(590, 196);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
+            this.picPista.Dock = System.Windows.Forms.DockStyle.Top;
+            this.picPista.Image = global::SimuladorCorrida.Properties.Resources.racetrack;
+            this.picPista.Location = new System.Drawing.Point(0, 0);
+            this.picPista.Name = "picPista";
+            this.picPista.Size = new System.Drawing.Size(590, 196);
+            this.picPista.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picPista.TabIndex = 0;
+            this.picPista.TabStop = false;
             // 
             // groupBox1
             // 
@@ -92,7 +92,29 @@
             this.groupBox1.Size = new System.Drawing.Size(566, 211);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "S";
+            this.groupBox1.Text = "Balcão de Apostas";
+            // 
+            // numCachorro
+            // 
+            this.numCachorro.Location = new System.Drawing.Point(361, 180);
+            this.numCachorro.Maximum = new decimal(new int[] {
+            4,
+            0,
+            0,
+            0});
+            this.numCachorro.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numCachorro.Name = "numCachorro";
+            this.numCachorro.Size = new System.Drawing.Size(52, 20);
+            this.numCachorro.TabIndex = 11;
+            this.numCachorro.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // btnCorram
             // 
@@ -103,6 +125,7 @@
             this.btnCorram.TabIndex = 10;
             this.btnCorram.Text = "Corram !";
             this.btnCorram.UseVisualStyleBackColor = true;
+            this.btnCorram.Click += new System.EventHandler(this.btnCorram_Click);
             // 
             // label3
             // 
@@ -305,28 +328,6 @@
             this.pic4.TabIndex = 5;
             this.pic4.TabStop = false;
             // 
-            // numCachorro
-            // 
-            this.numCachorro.Location = new System.Drawing.Point(361, 180);
-            this.numCachorro.Maximum = new decimal(new int[] {
-            4,
-            0,
-            0,
-            0});
-            this.numCachorro.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numCachorro.Name = "numCachorro";
-            this.numCachorro.Size = new System.Drawing.Size(52, 20);
-            this.numCachorro.TabIndex = 11;
-            this.numCachorro.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -337,27 +338,29 @@
             this.Controls.Add(this.pic2);
             this.Controls.Add(this.pic1);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.picPista);
+            this.MaximizeBox = false;
             this.Name = "Form1";
-            this.Text = "João";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Simulador de Apostas";
             this.Load += new System.EventHandler(this.Form1_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picPista)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numCachorro)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numValor)).EndInit();
             this.groupBox2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pic1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pic2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pic3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pic4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numCachorro)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox picPista;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.RadioButton rbtJoao;
         private System.Windows.Forms.Label lblApostaMinima;

@@ -33,7 +33,8 @@ namespace SimuladorCorrida
 
         public void LimparAposta()
         {
-            this.MinhaAposta.Valor = 0;
+            if (this.MinhaAposta != null)
+                this.MinhaAposta.Valor = 0;
         }
 
         public bool NovaAposta(int valor, int numCachorro)
@@ -50,13 +51,18 @@ namespace SimuladorCorrida
             this.MinhaAposta.NumCachorro = numCachorro;
             this.MinhaAposta.Valor = valor;
 
+            this.Dinheiro = this.Dinheiro - valor;
+
             return true;
         }
 
         public void Coletar(int vencedor)
         {
-            //TODO: Cobre minha aposta se eu ganhei
-            this.Dinheiro += MinhaAposta.ObterValorPagamento(vencedor);
+            if (this.MinhaAposta != null)
+            {
+                // Cobre minha aposta se eu ganhei
+                this.Dinheiro = this.Dinheiro + this.MinhaAposta.ObterValorPagamento(vencedor);
+            }
         }
     }
 }

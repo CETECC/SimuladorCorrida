@@ -29,11 +29,11 @@ namespace SimuladorCorrida
         {
             if (vencedor == NumCachorro)
             {
-                return Valor;
+                return Valor * 2;
             }
             else
             {
-                return Valor * (-1);
+                return 0;
             }
         }
     }

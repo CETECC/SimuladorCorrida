@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -13,11 +14,14 @@ namespace SimuladorCorrida
     public partial class Form1 : Form
     {
         private Apostador[] apostadores { get; set; }
-        private Cao[] cachorros { get; set; }
+        private Cao[] caes { get; set; }
 
         public Form1()
         {
             InitializeComponent();
+
+            int tamanhoPista = picPista.Size.Width;
+
             apostadores = new Apostador[3];
             apostadores[0] = new Apostador();
             apostadores[0].Nome = "João";
@@ -37,7 +41,26 @@ namespace SimuladorCorrida
             apostadores[2].MeuLabel = lblApostaAlfredo;
             apostadores[2].MeuRadioButton = rbtAlfredo;
 
-            cachorros = new Cao[4];
+            caes = new Cao[4];
+            caes[0] = new Cao();
+            caes[0].Numero = 1;
+            caes[0].TamanhoPista = tamanhoPista;
+            caes[0].MinhaPictureBox = pic1;
+
+            caes[1] = new Cao();
+            caes[1].Numero = 2;
+            caes[1].TamanhoPista = tamanhoPista;
+            caes[1].MinhaPictureBox = pic2;
+
+            caes[2] = new Cao();
+            caes[2].Numero = 3;
+            caes[2].TamanhoPista = tamanhoPista;
+            caes[2].MinhaPictureBox = pic3;
+
+            caes[3] = new Cao();
+            caes[3].Numero = 4;
+            caes[3].TamanhoPista = tamanhoPista;
+            caes[3].MinhaPictureBox = pic4;
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -64,7 +87,7 @@ namespace SimuladorCorrida
 
         private void btnAposta_Click(object sender, EventArgs e)
         {
-            foreach(Apostador apostador in apostadores)
+            foreach (Apostador apostador in apostadores)
             {
                 if (apostador.Nome == lblApostaNome.Text)
                 {
@@ -78,6 +101,59 @@ namespace SimuladorCorrida
                     }
                 }
             }
+        }
+
+        private void btnCorram_Click(object sender, EventArgs e)
+        {
+            // Desabilita todos os controles do Form
+            this.Enabled = false;
+
+            // Faz os cachorros andarem na pista, até terminarem o
+            // circuito e haver um vencedor.
+            int vencedor = Correr();
+
+            foreach (Apostador apostador in apostadores)
+            {
+                // Pagar de acordo com o vencedor
+                apostador.Coletar(vencedor);
+
+                // Limpa a aposta realizada
+                apostador.LimparAposta();
+
+                // Atualizar os rótulos
+                apostador.AtualizarLabels();
+            }
+
+            foreach (Cao cao in caes)
+            {
+                cao.VoltarInicio();
+            }
+
+            MessageBox.Show(string.Format("O cão número {0} venceu a corrida!", vencedor), "Fim de corrida", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            // Habilita todos os controles do Form
+            this.Enabled = true;
+        }
+
+        private int Correr()
+        {
+            int vencedor = 0;
+            while (vencedor == 0)
+            {
+                foreach (Cao cao in caes)
+                {
+                    bool ehVencedor = cao.Correr();
+
+                    if (ehVencedor)
+                    {
+                        vencedor = cao.Numero;
+                    }
+                    Thread.Sleep(50);
+                }
+                Application.DoEvents();
+            }
+
+            return vencedor;
         }
     }
 }
